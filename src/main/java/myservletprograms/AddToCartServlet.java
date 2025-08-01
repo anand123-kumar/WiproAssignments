@@ -9,7 +9,7 @@ public class AddToCartServlet extends HttpServlet {
  throws ServletException, IOException {
      String item = request.getParameter("item");
      Cookie cookie = new Cookie("item" + System.currentTimeMillis(), item);
-     cookie.setMaxAge(60 * 60); // 1 hour
+     cookie.setMaxAge(60 * 60); 
      response.addCookie(cookie);
 
      response.setContentType("text/html");

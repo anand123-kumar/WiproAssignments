@@ -11,7 +11,7 @@ public class QuantityServlet extends HttpServlet {
      response.setContentType("text/html");
      PrintWriter out = response.getWriter();
 
-     String productData = request.getParameter("product"); // Format: name-price
+     String productData = request.getParameter("product");
      String[] parts = productData.split("-");
      String productName = parts[0];
      String price = parts[1];
@@ -21,7 +21,7 @@ public class QuantityServlet extends HttpServlet {
      out.println("<form action='ReceiptServlet' method='post'>");
      out.println("Quantity: <input type='number' name='quantity' required><br><br>");
 
-     // Hidden Fields
+     
      out.println("<input type='hidden' name='productName' value='" + productName + "'>");
      out.println("<input type='hidden' name='price' value='" + price + "'>");
 

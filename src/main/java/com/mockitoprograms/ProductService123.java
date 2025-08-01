@@ -1,9 +1,9 @@
 package com.mockitoprograms;
 
 public class ProductService123 {
-	private ProductRepository123 repository;//interface reference variable
+	private ProductRepository123 repository;
 
-	 public ProductService123(ProductRepository123 repository) //Constructor taking interface as a parameter
+	 public ProductService123(ProductRepository123 repository)
 	 {
 	        this.repository = repository;
 	    }

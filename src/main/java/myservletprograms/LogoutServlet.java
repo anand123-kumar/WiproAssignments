@@ -1,5 +1,5 @@
 package myservletprograms;
-//LogoutServlet.java
+
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;

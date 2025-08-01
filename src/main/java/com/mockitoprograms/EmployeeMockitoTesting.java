@@ -23,13 +23,13 @@ public class EmployeeMockitoTesting {
 	@BeforeClass//NO @Mock @InitMocks
 	public static void init_1()
 	{
-		// set EmployeeDAO mock object
+		
 		mockEmployeeDAO = Mockito.mock(EmployeeDAO.class);
-		// create an Employee object
+		
 		emp1 = new Employee(1001L, "Raja", "Male",4);
 
-		// create another Employee object
-		emp2 = new Employee(1002L, "Thananya", "Female",7);
+		
+		emp2 = new Employee(1002L, "Ramya", "Female",7);
 	
 		// stubbing CONDITION is done for test cases
 					when(mockEmployeeDAO.getAll()).thenReturn(Arrays.asList(emp1, emp2));
@@ -41,9 +41,7 @@ public class EmployeeMockitoTesting {
 					when(mockEmployeeDAO.deleteEmployee(1001L)).thenReturn("DELETED");
 					when(mockEmployeeDAO.deleteEmployee(1001L)).thenReturn("REMOVED");
 					
-					/*
-					 * when chaining is to be done. We can also use: * when(mockEmployeeDAO.getPoints(1001L)).thenReturn(2,4,9);
-					 */
+					
 					when(mockEmployeeDAO.getPoints(1001L)).thenReturn(2).thenReturn(4).thenReturn(9);		
 	}
 	
@@ -77,19 +75,19 @@ public class EmployeeMockitoTesting {
 	@Test
 	public void multipleCallsTest() {
 		int points = mockEmployeeDAO.getPoints(1001L);
-		System.out.println(points);//2
+		System.out.println(points);
 
 		points = mockEmployeeDAO.getPoints(1002L);
-		System.out.println(points);//0
+		System.out.println(points);
 
 		points = mockEmployeeDAO.getPoints(1001L);
-		System.out.println(points);//4
+		System.out.println(points);
 
 		points = mockEmployeeDAO.getPoints(1001L);
-		System.out.println(points);//9
+		System.out.println(points);
 
 		points = mockEmployeeDAO.getPoints(1001L);
-		System.out.println(points);//9
+		System.out.println(points);
 	}
 
 }

@@ -1,0 +1,19 @@
+<!-- Shop.html -->
+<!DOCTYPE html>
+<html>
+<head><title>Shop</title></head>
+<body>
+    <h2>Select an Item to Add to Cart</h2>
+    <form action="AddToCartServlet" method="post">
+        <select name="item">
+            <option value="Shoes">Shoes</option>
+            <option value="Bag">Bag</option>
+            <option value="Watch">Watch</option>
+            <option value="T-Shirt">T-Shirt</option>
+        </select>
+        <input type="submit" value="Add to Cart">
+    </form>
+    <br>
+    <a href="ViewCartServlet">View Cart</a>
+</body>
+</html>

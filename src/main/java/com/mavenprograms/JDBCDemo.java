@@ -35,7 +35,7 @@ public class JDBCDemo {
 			//my password is empty
 			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/wipro2025","root","anandkumar@123");
 			
-			//con=DriverManager.getConnection("jdbc:mysql:@127.0.0.1:3306/wipro","root","");//valid
+			//con=DriverManager.getConnection("jdbc:mysql:@127.0.0.1:3306/wipro","root","");
 			st=con.createStatement();//build sql statements
 			rs=st.executeQuery("select * from wipro_emps");//ResultSet means rows and columns
 			while(rs.next())//iterate the records one by one!
@@ -79,9 +79,3 @@ public class JDBCDemo {
 	}
 
 }
-/*
-1001 Thananya 34932.3 HR
-1002 Abi 39932.3 Training
-1003 Devi 89032.3 HR
-1004 Sai 9000030.0 Testing
-*/

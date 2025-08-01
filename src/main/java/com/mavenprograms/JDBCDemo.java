@@ -16,23 +16,7 @@ public class JDBCDemo {
 		ResultSet rs=null;
 		try
 		{
-			//loading the mysql driver
-			//drivername is case sensitive
 			
-
-			/*
-			 * Since JDBC 4.0, explicitly registering the driver is optional. 
-			 * We just need to put vender's Jar in the classpath, 
-			 * and then JDBC driver manager can detect and load the driver automatically.
-			 */
-
-			//classname.methodname=>static method
-			//Class.forName("com.mysql.jdbc.Driver");  //type 4 mysql driver
-
-			//3306-DEFAULT mysql port number
-			//wipro2025:: mysql database name
-			//username:root
-			//my password is empty
 			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/wipro2025","root","anandkumar@123");
 			
 			//con=DriverManager.getConnection("jdbc:mysql:@127.0.0.1:3306/wipro","root","");

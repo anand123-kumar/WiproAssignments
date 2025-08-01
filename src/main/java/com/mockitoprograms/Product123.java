@@ -12,7 +12,7 @@ public class Product123 {
 
 		private double price;
 
-	    // Constructor, Getters and Setters
+	    
 	    public Product123(int id, String name, double price) {
 	        this.id = id;
 	        this.name = name;

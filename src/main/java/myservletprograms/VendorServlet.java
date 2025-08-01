@@ -1,5 +1,5 @@
 package myservletprograms;
-//VendorServlet.java
+
 import java.io.*;
 import java.sql.*;
 import javax.servlet.*;
@@ -12,8 +12,8 @@ public class VendorServlet extends HttpServlet {
      PrintWriter out = response.getWriter();
 
      String jdbcUrl = "jdbc:mysql://localhost:3306/shopdb";
-     String username = "root"; // your DB user
-     String password = "anandkumar@123"; // your DB password
+     String username = "root"; 
+     String password = "anandkumar@123";
 
      try {
          Class.forName("com.mysql.cj.jdbc.Driver");

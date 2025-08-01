@@ -12,7 +12,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
-        // Get form data
+        
         String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -22,7 +22,7 @@ public class RegistrationServlet extends HttpServlet {
         String married = request.getParameter("married") != null ? "Yes" : "No";
         String note = request.getParameter("note");
 
-        // Set data in request to access in JSP
+        
         request.setAttribute("fullname", fullname);
         request.setAttribute("email", email);
         request.setAttribute("birthday", birthday);
@@ -31,7 +31,7 @@ public class RegistrationServlet extends HttpServlet {
         request.setAttribute("married", married);
         request.setAttribute("note", note);
 
-        // Forward to success page
+       
         RequestDispatcher dispatcher = request.getRequestDispatcher("success.jsp");
         dispatcher.forward(request, response);
     }

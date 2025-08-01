@@ -11,7 +11,7 @@ public class BalanceServlet extends HttpServlet {
      response.setContentType("text/html");
      PrintWriter out = response.getWriter();
 
-     HttpSession session = request.getSession(false); // Don't create new
+     HttpSession session = request.getSession(false); 
 
      if (session != null && session.getAttribute("name") != null) {
          String name = (String) session.getAttribute("name");

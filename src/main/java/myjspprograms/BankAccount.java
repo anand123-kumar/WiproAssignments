@@ -5,7 +5,7 @@ public class BankAccount {
  private String name;
  private double balance;
 
- // Getters and setters
+ 
  public String getAccountNo() {
      return accountNo;
  }

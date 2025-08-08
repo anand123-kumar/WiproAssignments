@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Form</title>
+</head>
+<body>
+    <h2>User Form</h2>
+    <form th:action="@{/saveUser}" th:object="${userData}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        
+        Name: <input type="text" th:field="*{name}" /> <br/>
+        <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+        Email: <input type="email" th:field="*{email}" /> <br/>
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+        Phone: <input type="text" th:field="*{phone}" /> <br/>
+        <div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
+
+        Address: <input type="text" th:field="*{address}" /> <br/>
+        <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of Users</title>
+</head>
+<body>
+    <h2>List of Users</h2>
+    <a href="/showNewUserForm">Add New User</a>
+    <table border="1">
+        <tr>
+            <th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Actions</th>
+        </tr>
+        <tr th:each="user : ${listUsers}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.phone}"></td>
+            <td th:text="${user.address}"></td>
+            <td>
+                <a th:href="@{'/updateUser/' + ${user.id}}">Edit</a>
+                <a th:href="@{'/deleteUser/' + ${user.id}}"
+                   onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

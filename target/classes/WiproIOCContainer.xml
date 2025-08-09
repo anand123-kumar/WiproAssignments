@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans 
+           https://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop 
+           https://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context 
+           https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:properties/database.properties" />
+
+    <context:component-scan base-package="beanfiles"/>
+
+    <bean id="loggingAspect" class="beanfiles.LoggingAspect" />
+
+    <aop:config>
+        <aop:aspect ref="loggingAspect">
+            <aop:pointcut id="shoppingPointcut" expression="execution(* beanfiles.ShoppingService.*(..))"/>
+            <aop:before method="logBefore" pointcut-ref="shoppingPointcut"/>
+            <aop:after-returning method="logAfterReturning" pointcut-ref="shoppingPointcut"/>
+            <aop:after-throwing method="logAfterThrowing" pointcut-ref="shoppingPointcut" throwing="ex"/>
+            <aop:around method="logAround" pointcut-ref="shoppingPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="bank" class="beanfiles.Bank">
+        <constructor-arg value="101" />
+        <constructor-arg value="SBI" />
+    </bean>
+
+    <bean id="account" class="beanfiles.Account">
+        <constructor-arg value="123456" />
+        <constructor-arg value="Anand Kumar" />
+        <constructor-arg value="50000" />
+        <constructor-arg ref="bank" />
+    </bean>
+    <!-- Product Bean -->
+    <bean id="product" class="beanfiles.Product">
+        <constructor-arg value="101"/>
+        <constructor-arg value="Laptop"/>
+        <constructor-arg value="75000"/>
+    </bean>
+
+    <!-- Purchase Bean with Constructor Autowire -->
+    <bean id="purchase" class="beanfiles.Purchase" autowire="constructor">
+        <constructor-arg value="5001"/>
+        <constructor-arg value="2025-08-08"/>
+        <!-- Product is autowired automatically -->
+    </bean>
+    <!-- Enable AOP -->
+    <aop:aspectj-autoproxy/>
+
+    <!-- ShoppingService Bean -->
+    <bean id="shoppingService" class="beanfiles.ShoppingService"/>
+
+    <!-- Logging Aspect Bean -->
+    <bean id="loggingAspect" class="beanfiles.LoggingAspect"/>
+</beans>
+
+    
+</beans>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tirupati Temple Darshan Booking</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        
+        .temple-image {
+            width: 120px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: 3px solid #ff9a56;
+        }
+        
+        .temple-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .temple-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff9a56, #ff6b35);
+            margin: 0 auto 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-title {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        
+        .form-control, .form-select {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-check-input:checked {
+            background-color: #667eea;
+            border-color: #667eea;
+        }
+        
+        .input-group-text {
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-right: none;
+        }
+        
+        .input-group .form-control {
+            border-left: none;
+        }
+        
+        .seva-options {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+        }
+        
+        .tooltip-inner {
+            background-color: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .form-card {
+                padding: 20px;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-card">
+            <!-- Temple Image -->
+            <div class="temple-image">
+                <img src="D:\CSSBootstrapassignment/TTDImage.jpg" 
+                     alt="Tirupati Temple" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="temple-icon" style="display:none;">🏛️</div>
+            </div>
+            
+            <!-- Form Title -->
+            <h2 class="form-title">Tirupati Temple Darshan Booking Form</h2>
+            
+            <!-- Form -->
+            <form id="bookingForm" novalidate>
+                <div class="row">
+                    <!-- Full Name -->
+                    <div class="col-12 mb-3">
+                        <label for="fullName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="fullName" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid full name.
+                        </div>
+                    </div>
+                    
+                    <!-- Email Address -->
+                    <div class="col-12 mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid email address.
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Number -->
+                    <div class="col-12 mb-3">
+                        <label for="mobile" class="form-label">Mobile Number</label>
+                        <div class="input-group">
+                            <select class="form-select" style="max-width: 100px;" id="countryCode">
+                                <option value="+91">+91</option>
+                                <option value="+1">+1</option>
+                                <option value="+44">+44</option>
+                            </select>
+                            <input type="tel" class="form-control" id="mobile" placeholder="1234567890" pattern="[0-9]{10}" required>
+                        </div>
+                        <div class="invalid-feedback">
+                            Please provide a valid 10-digit mobile number.
+                        </div>
+                    </div>
+                    
+                    <!-- Gender -->
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Gender</label>
+                        <div class="d-flex gap-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="other" value="other">
+                                <label class="form-check-label" for="other">Other</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Darshan Date and Time -->
+                    <div class="col-md-6 mb-3">
+                        <label for="darshanDate" class="form-label">Darshan Date</label>
+                        <input type="date" class="form-control" id="darshanDate" required>
+                        <div class="invalid-feedback">
+                            Please select a darshan date.
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label for="timeSlot" class="form-label">Darshan Time Slot</label>
+                        <select class="form-select" id="timeSlot" required>
+                            <option value="">Choose...</option>
+                            <option value="morning">Morning</option>
+                            <option value="afternoon">Afternoon</option>
+                            <option value="evening">Evening</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a time slot.
+                        </div>
+                    </div>
+                    
+                    <!-- Number of Tickets -->
+                    <div class="col-12 mb-3">
+                        <label for="tickets" class="form-label">Number of Tickets</label>
+                        <input type="number" class="form-control" id="tickets" min="1" max="10" value="1" required>
+                        <div class="invalid-feedback">
+                            Please select between 1 and 10 tickets.
+                        </div>
+                    </div>
+                    
+                    <!-- Seva Type -->
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Seva Type</label>
+                        <div class="seva-options">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="archana" value="archana" checked>
+                                        <label class="form-check-label" for="archana">Archana</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="abhishekam" value="abhishekam" checked>
+                                        <label class="form-check-label" for="abhishekam">Abhishekam</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="specialEntry" value="specialEntry" checked>
+                                        <label class="form-check-label" for="specialEntry">Special Entry Darshan</label>
+                                    </div>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="checkbox" id="suprabhata" value="suprabhata" checked>
+                                        <label class="form-check-label" for="suprabhata">Suprabhata Seva</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ID Proof Upload -->
+                    <div class="col-12 mb-3">
+                        <label for="idProof" class="form-label">ID Proof Upload 
+                            <i class="bi bi-question-circle" data-bs-toggle="tooltip" title="Please upload a clear image or PDF of your government-issued ID (Aadhaar, Passport, Driving License, etc.). File size should be less than 5MB."></i>
+                        </label>
+                        <input type="file" class="form-control" id="idProof" accept="image/*,.pdf">
+                        <div class="form-text">Upload image or PDF (max 5MB)</div>
+                    </div>
+                    
+                    <!-- Address -->
+                    <div class="col-12 mb-4">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Enter your address" id="address" style="height: 100px" required></textarea>
+                            <label for="address">Address</label>
+                            <div class="invalid-feedback">
+                                Please provide your address.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit and Reset Buttons -->
+                    <div class="col-12 mb-2">
+                        <button type="submit" class="btn btn-primary w-100 mb-3">Submit</button>
+                    </div>
+                    <div class="col-12">
+                        <button type="reset" class="btn btn-secondary w-100">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">🙏 Booking Confirmed!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="temple-image mx-auto mb-3" style="width: 100px; height: 70px;">
+                        <img src="D:/cssbootstrap/TTDImage.jpg" 
+                             alt="Tirupati Temple"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="temple-icon" style="width: 80px; height: 80px; font-size: 2.5rem; display:none;">🏛️</div>
+                    </div>
+                    <h4 class="text-success mb-3">Your Tirupati Darshan Booking is Confirmed!</h4>
+                    <p class="mb-3">Thank you for your booking. You will receive a confirmation email shortly with your booking details and instructions.</p>
+                    <p><strong>Booking Reference:</strong> <span class="text-primary" id="bookingRef"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
+        // Form validation and submission
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            if (this.checkValidity()) {
+                // Generate booking reference
+                const bookingRef = 'TTD' + Date.now().toString().slice(-8);
+                document.getElementById('bookingRef').textContent = bookingRef;
+                
+                // Show confirmation modal
+                const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+                modal.show();
+                
+                // Reset form after modal is closed
+                document.getElementById('confirmationModal').addEventListener('hidden.bs.modal', function () {
+                    document.getElementById('bookingForm').reset();
+                    document.getElementById('bookingForm').classList.remove('was-validated');
+                });
+            }
+            
+            this.classList.add('was-validated');
+        });
+
+        // Reset form validation on reset button click
+        document.querySelector('button[type="reset"]').addEventListener('click', function() {
+            setTimeout(function() {
+                document.getElementById('bookingForm').classList.remove('was-validated');
+            }, 100);
+        });
+
+        // Set minimum date to today
+        document.getElementById('darshanDate').min = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>

@@ -147,13 +147,10 @@
                 <div class="temple-icon" style="display:none;">🏛️</div>
             </div>
             
-            <!-- Form Title -->
             <h2 class="form-title">Tirupati Temple Darshan Booking Form</h2>
             
-            <!-- Form -->
             <form id="bookingForm" novalidate>
                 <div class="row">
-                    <!-- Full Name -->
                     <div class="col-12 mb-3">
                         <label for="fullName" class="form-label">Full Name</label>
                         <input type="text" class="form-control" id="fullName" required>
@@ -162,7 +159,6 @@
                         </div>
                     </div>
                     
-                    <!-- Email Address -->
                     <div class="col-12 mb-3">
                         <label for="email" class="form-label">Email Address</label>
                         <input type="email" class="form-control" id="email" required>
@@ -171,7 +167,6 @@
                         </div>
                     </div>
                     
-                    <!-- Mobile Number -->
                     <div class="col-12 mb-3">
                         <label for="mobile" class="form-label">Mobile Number</label>
                         <div class="input-group">
@@ -187,7 +182,6 @@
                         </div>
                     </div>
                     
-                    <!-- Gender -->
                     <div class="col-12 mb-3">
                         <label class="form-label">Gender</label>
                         <div class="d-flex gap-4">
@@ -206,7 +200,6 @@
                         </div>
                     </div>
                     
-                    <!-- Darshan Date and Time -->
                     <div class="col-md-6 mb-3">
                         <label for="darshanDate" class="form-label">Darshan Date</label>
                         <input type="date" class="form-control" id="darshanDate" required>
@@ -228,7 +221,6 @@
                         </div>
                     </div>
                     
-                    <!-- Number of Tickets -->
                     <div class="col-12 mb-3">
                         <label for="tickets" class="form-label">Number of Tickets</label>
                         <input type="number" class="form-control" id="tickets" min="1" max="10" value="1" required>
@@ -237,7 +229,6 @@
                         </div>
                     </div>
                     
-                    <!-- Seva Type -->
                     <div class="col-12 mb-3">
                         <label class="form-label">Seva Type</label>
                         <div class="seva-options">
@@ -266,7 +257,6 @@
                         </div>
                     </div>
                     
-                    <!-- ID Proof Upload -->
                     <div class="col-12 mb-3">
                         <label for="idProof" class="form-label">ID Proof Upload 
                             <i class="bi bi-question-circle" data-bs-toggle="tooltip" title="Please upload a clear image or PDF of your government-issued ID (Aadhaar, Passport, Driving License, etc.). File size should be less than 5MB."></i>
@@ -275,7 +265,6 @@
                         <div class="form-text">Upload image or PDF (max 5MB)</div>
                     </div>
                     
-                    <!-- Address -->
                     <div class="col-12 mb-4">
                         <div class="form-floating">
                             <textarea class="form-control" placeholder="Enter your address" id="address" style="height: 100px" required></textarea>
@@ -286,7 +275,6 @@
                         </div>
                     </div>
                     
-                    <!-- Submit and Reset Buttons -->
                     <div class="col-12 mb-2">
                         <button type="submit" class="btn btn-primary w-100 mb-3">Submit</button>
                     </div>
@@ -298,7 +286,6 @@
         </div>
     </div>
     
-    <!-- Confirmation Modal -->
     <div class="modal fade" id="confirmationModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -332,7 +319,6 @@
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
 
-        // Form validation and submission
         document.getElementById('bookingForm').addEventListener('submit', function(event) {
             event.preventDefault();
             event.stopPropagation();

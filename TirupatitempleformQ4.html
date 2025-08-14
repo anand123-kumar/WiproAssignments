@@ -313,7 +313,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Initialize tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
@@ -324,15 +323,12 @@
             event.stopPropagation();
             
             if (this.checkValidity()) {
-                // Generate booking reference
                 const bookingRef = 'TTD' + Date.now().toString().slice(-8);
                 document.getElementById('bookingRef').textContent = bookingRef;
                 
-                // Show confirmation modal
                 const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
                 modal.show();
                 
-                // Reset form after modal is closed
                 document.getElementById('confirmationModal').addEventListener('hidden.bs.modal', function () {
                     document.getElementById('bookingForm').reset();
                     document.getElementById('bookingForm').classList.remove('was-validated');
@@ -342,14 +338,12 @@
             this.classList.add('was-validated');
         });
 
-        // Reset form validation on reset button click
         document.querySelector('button[type="reset"]').addEventListener('click', function() {
             setTimeout(function() {
                 document.getElementById('bookingForm').classList.remove('was-validated');
             }, 100);
         });
 
-        // Set minimum date to today
         document.getElementById('darshanDate').min = new Date().toISOString().split('T')[0];
     </script>
 </body>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+const inventory = (function () {
+    let stock = 0;
+
+    return {
+        getStock: function () {
+            return stock;
+        },
+        addStock: function (quantity) {
+            stock += quantity;
+            console.log("Stock after adding " + stock);
+        },
+        sell: function (quantity) {
+            if (stock >= quantity) {
+                stock -= quantity;
+                console.log("Sold " + quantity + " items.");
+            } else {
+                console.log("Insufficient stock");
+            }
+        }
+    };
+})();
+
+inventory.addStock(7);
+inventory.sell(5);
+console.log("Stock remaining " + inventory.getStock());
+</script>
+</body>
+</html>

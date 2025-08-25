@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-// ---------------- Parent Component ----------------
 function FruitCommunication() {
   // Parent's state holding fruit list
   const [fruits, setFruits] = useState(["Apple", "Mango"]);
@@ -29,7 +28,6 @@ function FruitCommunication() {
   );
 }
 
-// ---------------- Child A ----------------
 // Displays fruits list and allows selecting one
 function ChildA({ fruits, onSelectFruit }) {
   return (
@@ -47,7 +45,6 @@ function ChildA({ fruits, onSelectFruit }) {
   );
 }
 
-// ---------------- Child B ----------------
 // Sends new fruit ("Orange") back to parent
 function ChildB({ onSendFruit }) {
   return (
@@ -60,7 +57,6 @@ function ChildB({ onSendFruit }) {
   );
 }
 
-// ---------------- Child C ----------------
 // Displays the fruit selected from Child A
 function ChildC({ selectedFruit }) {
   return (

@@ -1,4 +1,3 @@
-// Controlled Component - Using State
 import React, { Component } from "react"; 
 // Import React and Component class for creating a class-based component
 

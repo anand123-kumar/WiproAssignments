@@ -24,6 +24,22 @@ import FruitCommunication from "./REACTPROGRAMS/FruitCommunication";
 import ChessTournamentForm from "./REACTPROGRAMS/ChessTournamentForm";
 import HockeyTournament from "./REACTPROGRAMS/HockeyTournament";
 import TailoringInventory from "./REACTPROGRAMS/TailoringInventory";
+import FootballPlayerManagement from "./REACTPROGRAMS/FootballPlayerManagement";
+import { PowerCutProvider } from "./REACTPROGRAMS/PowerCutContext";
+import SendAnnouncement from "./REACTPROGRAMS/SendAnnouncement";
+import AnnouncementList from "./REACTPROGRAMS/AnnouncementList";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./REACTPROGRAMS/Navbar";
+import Home from "./REACTPROGRAMS/Home";
+import AddTaxpayer from "./REACTPROGRAMS/AddTaxpayer";
+import TaxpayerList from "./REACTPROGRAMS/TaxpayerList";
+import CalculateTax from "./REACTPROGRAMS/CalculateTax";
+import TaxRates from "./REACTPROGRAMS/TaxRates";
+import Contact from "./REACTPROGRAMS/Contact";
+import About from "./REACTPROGRAMS/About";
+import FAQ from "./REACTPROGRAMS/FAQ";
+import NotFound from "./REACTPROGRAMS/NotFound";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 function App() {
@@ -59,6 +75,33 @@ function App() {
       <ChessTournamentForm />
       <HockeyTournament />
       <TailoringInventory />
+      <FootballPlayerManagement />
+       <PowerCutProvider>
+      <div className="container mt-4">
+        <SendAnnouncement />
+        <AnnouncementList />
+      </div>
+    </PowerCutProvider>
+    <Router>
+      <Navbar />
+      <div className="container mt-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/add-taxpayer" element={<AddTaxpayer />} />
+          <Route path="/taxpayer-list" element={<TaxpayerList />} />
+          <Route path="/calculate-tax" element={<CalculateTax />} />
+          <Route path="/tax-rates" element={<TaxRates />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </Router>
+     
+  
+
+
     </div>
   );
 }

@@ -1,4 +1,3 @@
-// Uncontrolled Component - Using Refs
 import React, { Component, createRef } from "react"; 
 // Import React, Component class, and createRef for uncontrolled inputs
 

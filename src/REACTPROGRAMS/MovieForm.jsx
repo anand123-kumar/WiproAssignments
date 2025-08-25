@@ -1,101 +1,108 @@
-// Import React and Component class
+// Import React and Component class for creating class-based components
 import React, { Component } from "react";
 
-// Define a class component MovieForm
+// Define a class component named "MovieForm"
 class MovieForm extends Component {
+  // Constructor method to initialize state and bind methods
   constructor(props) {
-    super(props);
+    super(props); // Call parent class constructor with props
     console.log("constructor executed"); // Logs when constructor runs
 
-    // Initial state of the component
+    // Define initial state of the component
     this.state = {
-      // Form fields
-      title: "",          // Movie title
-      director: "",       // Director's name
-      year: "",           // Release year
-      genre: "Action",    // Default genre
-      rating: "",         // Rating (1-5)
-      description: "",    // Movie description
-      platforms: {        // Streaming platforms (checkboxes)
-        netflix: false,
-        prime: false,
-        disney: false,
-        others: false,
+      // Form fields (controlled components)
+      title: "",          // Movie title input
+      director: "",       // Director's name input
+      year: "",           // Release year input
+      genre: "Action",    // Dropdown (default value: "Action")
+      rating: "",         // Radio button (1-5)
+      description: "",    // Textarea for movie description
+      platforms: {        // Object for checkbox values
+        netflix: false,   // Netflix checkbox state
+        prime: false,     // Amazon Prime checkbox state
+        disney: false,    // Disney+ checkbox state
+        others: false,    // Other platforms checkbox state
       },
-      // Movie list array to store submitted movies
-      movies: [],
-      // Toggle state to show/hide form (for unmount demo)
-      showForm: true,
+      movies: [],         // Array to store submitted movies
+      showForm: true,     // Boolean to toggle form visibility (for unmount demo)
     };
   }
 
   // ---------------- Lifecycle Methods ----------------
+
+  // Runs before render when props/state are updated
   static getDerivedStateFromProps(nextProps, prevState) {
     console.log("getDerivedStateFromProps executed");
-    return null; // No state updates from props
+    return null; // No update to state from props
   }
 
+  // Runs after the component is mounted on the DOM
   componentDidMount() {
-    console.log("componentDidMount executed"); // Runs after component mounts
+    console.log("componentDidMount executed");
   }
 
+  // Decides whether to re-render component
   shouldComponentUpdate(nextProps, nextState) {
     console.log("shouldComponentUpdate executed");
-    return true; // Always allow re-render
+    return true; // Always re-render
   }
 
+  // Runs just before the update is applied to the DOM
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log("getSnapshotBeforeUpdate executed");
-    return null; // No snapshot needed
+    return null; // Not using snapshot
   }
 
+  // Runs after update is finished
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log("componentDidUpdate executed");
   }
 
+  // Runs before component is removed from DOM
   componentWillUnmount() {
     console.log("componentWillUnmount executed");
   }
 
   // ---------------- Handlers ----------------
-  // Handle input field changes (text, number, textarea, select, radio)
+
+  // Handle input changes for text, number, textarea, select, and radio
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.name]: e.target.value }); // Dynamically update state
   };
 
-  // Handle checkbox changes (streaming platforms)
+  // Handle checkbox input changes for platforms
   handleCheckboxChange = (e) => {
-    const { name, checked } = e.target;
+    const { name, checked } = e.target; // Extract checkbox name and checked status
     this.setState((prevState) => ({
       platforms: {
-        ...prevState.platforms,
-        [name]: checked, // Update only clicked checkbox
+        ...prevState.platforms, // Keep old values
+        [name]: checked,        // Update only changed checkbox
       },
     }));
   };
 
   // Handle form submission
   handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault(); // Prevents default page reload
 
-    // Extract form data from state
+    // Extract form values from state
     const { title, director, year, genre, rating, description, platforms } = this.state;
 
     // Create a new movie object
     const newMovie = {
-      title,
-      director,
-      year,
-      genre,
-      rating,
-      description,
-      platforms: Object.keys(platforms).filter((key) => platforms[key]), // Store checked platforms
+      title,          // Movie title
+      director,       // Director
+      year,           // Release year
+      genre,          // Selected genre
+      rating,         // Selected rating
+      description,    // Description text
+      platforms: Object.keys(platforms).filter((key) => platforms[key]), // Only checked platforms
     };
 
-    // Update movies list & reset form fields
+    // Update movies array and reset form fields
     this.setState((prevState) => ({
-      movies: [...prevState.movies, newMovie], // Add new movie to list
-      // Reset form inputs
+      movies: [...prevState.movies, newMovie], // Add new movie to array
+      // Reset form fields
       title: "",
       director: "",
       year: "",
@@ -106,27 +113,30 @@ class MovieForm extends Component {
     }));
   };
 
-  // Toggle form visibility (for unmount demo)
+  // Toggle form visibility (mount/unmount form)
   toggleForm = () => {
     this.setState((prevState) => ({ showForm: !prevState.showForm }));
   };
 
   // ---------------- Render Method ----------------
   render() {
-    console.log("render executed"); // Logs every render
+    console.log("render executed"); // Logs every time render runs
     return (
       <div className="container mt-4">
-        {/* Toggle button to show/hide form */}
+        {/* Button to toggle form visibility */}
         <button className="btn btn-warning mb-3" onClick={this.toggleForm}>
           {this.state.showForm ? "Hide Form" : "Show Form"}
         </button>
 
-        {/* Conditional rendering: show form only if showForm = true */}
+        {/* Show form only if showForm is true */}
         {this.state.showForm && (
           <div className="card p-4">
             <h3>Add Movie</h3>
+
+            {/* Form for movie details */}
             <form onSubmit={this.handleSubmit}>
-              {/* Movie Title */}
+              
+              {/* Movie Title Input */}
               <div className="mb-3">
                 <label className="form-label">Movie Title</label>
                 <input
@@ -139,7 +149,7 @@ class MovieForm extends Component {
                 />
               </div>
 
-              {/* Director */}
+              {/* Director Input */}
               <div className="mb-3">
                 <label className="form-label">Director</label>
                 <input
@@ -152,7 +162,7 @@ class MovieForm extends Component {
                 />
               </div>
 
-              {/* Release Year */}
+              {/* Release Year Input */}
               <div className="mb-3">
                 <label className="form-label">Release Year</label>
                 <input
@@ -221,7 +231,7 @@ class MovieForm extends Component {
                       checked={this.state.platforms[platform]}
                       onChange={this.handleCheckboxChange}
                     />{" "}
-                    {/* Display label text dynamically */}
+                    {/* Show readable text for each checkbox */}
                     {platform === "netflix"
                       ? "Netflix"
                       : platform === "prime"
@@ -241,7 +251,7 @@ class MovieForm extends Component {
           </div>
         )}
 
-        {/* Movies Table (only visible if at least one movie exists) */}
+        {/* Show movies table if at least one movie is added */}
         {this.state.movies.length > 0 && (
           <div className="mt-4">
             <table className="table table-bordered">
@@ -256,7 +266,7 @@ class MovieForm extends Component {
                 </tr>
               </thead>
               <tbody>
-                {/* Map through movies and display each as a row */}
+                {/* Loop through movies array and render rows */}
                 {this.state.movies.map((movie, index) => (
                   <tr key={index}>
                     <td>{movie.title}</td>
@@ -276,5 +286,5 @@ class MovieForm extends Component {
   }
 }
 
-// Export component so it can be used elsewhere
+// Export MovieForm so it can be imported in other files
 export default MovieForm;

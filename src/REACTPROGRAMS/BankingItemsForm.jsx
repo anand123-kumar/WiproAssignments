@@ -1,6 +1,4 @@
-// Import React and useState hook from React library
 import React, { useState } from "react";
-// Import Bootstrap CSS for styling
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Define a functional component named BakingItemsForm

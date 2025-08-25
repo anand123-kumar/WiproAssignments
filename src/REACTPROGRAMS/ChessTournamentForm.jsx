@@ -1,89 +1,85 @@
-// Import React library for building the component
 import React, { useState } from "react";
-
-// Import Formik form helpers, Field for input binding, Form wrapper, and ErrorMessage for validation errors
 import { Formik, Field, Form, ErrorMessage } from "formik";
-
-// Import Yup for schema-based form validation
 import * as Yup from "yup";
 
-// Main component definition
+// Main functional component definition
 const ChessTournamentForm = () => {
-  // State to store submitted players (array of player objects)
+  // State to keep track of registered players (array of player objects)
   const [players, setPlayers] = useState([]);
 
-  // Validation schema defined using Yup for all fields
+  // Validation schema defined using Yup
   const validationSchema = Yup.object().shape({
     playerName: Yup.string()
-      .min(3, "Name must be at least 3 characters") // Minimum 3 characters required
-      .required("Player Name is required"), // Cannot be empty
+      .min(3, "Name must be at least 3 characters") // Minimum length validation
+      .required("Player Name is required"), // Required field
 
     dateOfBirth: Yup.date()
-      .required("Date of Birth is required") // Must be provided
+      .required("Date of Birth is required") // Must be filled
       .test("age", "Age must be between 5 and 90 years", (value) => {
-        if (!value) return false; // If no date, fail validation
-        const today = new Date();
-        const dob = new Date(value); // Convert value to Date object
-        const age = today.getFullYear() - dob.getFullYear(); // Calculate age
-        return age >= 5 && age <= 90; // Must be between 5 and 90
+        if (!value) return false; // Fail if no date
+        const today = new Date(); // Get today’s date
+        const dob = new Date(value); // Convert input to Date
+        const age = today.getFullYear() - dob.getFullYear(); // Calculate rough age
+        return age >= 5 && age <= 90; // Must be in range
       }),
 
-    gender: Yup.string().required("Gender is required"), // Gender must be selected
+    gender: Yup.string().required("Gender is required"), // Must select gender
 
     fideId: Yup.string()
-      .matches(/^[0-9]{8}$/, "FIDE ID must be exactly 8 digits") // Must be exactly 8 digits
-      .required("FIDE ID is required"),
+      .matches(/^[0-9]{8}$/, "FIDE ID must be exactly 8 digits") // Regex for 8 digits
+      .required("FIDE ID is required"), // Required field
 
     rating: Yup.number()
-      .min(100, "Rating must be at least 100") // Minimum rating 100
-      .max(3000, "Rating cannot exceed 3000") // Maximum rating 3000
-      .required("Rating is required"),
+      .min(100, "Rating must be at least 100") // Lower bound
+      .max(3000, "Rating cannot exceed 3000") // Upper bound
+      .required("Rating is required"), // Required
 
     email: Yup.string()
-      .email("Invalid email format") // Must be valid email
-      .required("Email is required"),
+      .email("Invalid email format") // Must follow email format
+      .required("Email is required"), // Required
 
     mobile: Yup.string()
-      .matches(/^[6-9][0-9]{9}$/, "Mobile must be 10 digits starting with 6-9") // Starts with 6-9 and 10 digits
-      .required("Mobile number is required"),
+      .matches(
+        /^[6-9][0-9]{9}$/, // Regex: must start with 6-9 and be 10 digits
+        "Mobile must be 10 digits starting with 6-9"
+      )
+      .required("Mobile number is required"), // Required
 
-    country: Yup.string().required("Country is required"), // Must be provided
+    country: Yup.string().required("Country is required"), // Required
 
-    category: Yup.string().required("Category is required"), // Must choose category
+    category: Yup.string().required("Category is required"), // Required
 
     parentContact: Yup.string().when("category", {
-      is: "Under 12", // Only required if category is "Under 12"
+      is: "Under 12", // Rule applies only if category is "Under 12"
       then: (schema) =>
         schema
-          .matches(/^[0-9]{10}$/, "Parent contact must be 10 digits") // 10-digit number
-          .required("Parent contact is required for Under 12 category"),
-      otherwise: (schema) => schema.notRequired(), // Not required otherwise
+          .matches(/^[0-9]{10}$/, "Parent contact must be 10 digits") // Must be valid number
+          .required("Parent contact is required for Under 12 category"), // Required if U-12
+      otherwise: (schema) => schema.notRequired(), // Optional otherwise
     }),
 
-    payment: Yup.boolean().oneOf(
-      [true],
-      "Payment confirmation is required"
-    ), // Must check payment
+    payment: Yup.boolean().oneOf([true], "Payment confirmation is required"), // Checkbox must be true
 
     terms: Yup.boolean().oneOf(
       [true],
-      "You must accept the Terms & Conditions"
-    ), // Must accept terms
+      "You must accept the Terms & Conditions" // Checkbox must be true
+    ),
   });
 
-  // Handle form submission
+  // Function to handle form submission
   const handleSubmit = (values, { resetForm }) => {
-    console.log("Form Submitted:", values); // Log submitted form values
-    setPlayers([...players, values]); // Append new player to players list
-    resetForm(); // Reset the form after submission
+    console.log("Form Submitted:", values); // Log values in console
+    setPlayers([...players, values]); // Append new player to existing list
+    resetForm(); // Reset fields after submit
   };
 
+  // JSX UI return
   return (
     <div className="container mt-5">
-      {/* Heading */}
+      {/* Page heading */}
       <h2 className="text-center mb-4">Chess Tournament Registration Form</h2>
 
-      {/* Formik wrapper for handling form state and validation */}
+      {/* Formik wrapper initializes form, validation, and submission */}
       <Formik
         initialValues={{
           playerName: "",
@@ -99,13 +95,14 @@ const ChessTournamentForm = () => {
           payment: false,
           terms: false,
         }}
-        validationSchema={validationSchema} // Apply Yup validation schema
-        onSubmit={handleSubmit} // Handle form submit
+        validationSchema={validationSchema} // Attach Yup schema
+        onSubmit={handleSubmit} // Submission function
       >
-        {/* Render function for Formik */}
+        {/* Render prop to access form values */}
         {({ values }) => (
+          // Form wrapper
           <Form>
-            {/* Player Name */}
+            {/* Player Name field */}
             <div className="mb-3">
               <label className="form-label">Player Name</label>
               <Field name="playerName" className="form-control" />
@@ -116,7 +113,7 @@ const ChessTournamentForm = () => {
               />
             </div>
 
-            {/* Date of Birth */}
+            {/* Date of Birth field */}
             <div className="mb-3">
               <label className="form-label">Date of Birth</label>
               <Field type="date" name="dateOfBirth" className="form-control" />
@@ -127,7 +124,7 @@ const ChessTournamentForm = () => {
               />
             </div>
 
-            {/* Gender Selection */}
+            {/* Gender dropdown */}
             <div className="mb-3">
               <label className="form-label">Gender</label>
               <Field as="select" name="gender" className="form-select">
@@ -143,7 +140,7 @@ const ChessTournamentForm = () => {
               />
             </div>
 
-            {/* FIDE ID */}
+            {/* FIDE ID field */}
             <div className="mb-3">
               <label className="form-label">FIDE ID</label>
               <Field name="fideId" className="form-control" />
@@ -154,7 +151,7 @@ const ChessTournamentForm = () => {
               />
             </div>
 
-            {/* Rating */}
+            {/* Rating field */}
             <div className="mb-3">
               <label className="form-label">Rating</label>
               <Field type="number" name="rating" className="form-control" />
@@ -165,7 +162,7 @@ const ChessTournamentForm = () => {
               />
             </div>
 
-            {/* Email */}
+            {/* Email field */}
             <div className="mb-3">
               <label className="form-label">Email</label>
               <Field type="email" name="email" className="form-control" />
@@ -176,7 +173,7 @@ const ChessTournamentForm = () => {
               />
             </div>
 
-            {/* Mobile Number */}
+            {/* Mobile number field */}
             <div className="mb-3">
               <label className="form-label">Mobile Number</label>
               <Field name="mobile" className="form-control" />
@@ -187,7 +184,7 @@ const ChessTournamentForm = () => {
               />
             </div>
 
-            {/* Country */}
+            {/* Country field */}
             <div className="mb-3">
               <label className="form-label">Country</label>
               <Field name="country" className="form-control" />
@@ -198,7 +195,7 @@ const ChessTournamentForm = () => {
               />
             </div>
 
-            {/* Category */}
+            {/* Category dropdown */}
             <div className="mb-3">
               <label className="form-label">Category</label>
               <Field as="select" name="category" className="form-select">
@@ -214,7 +211,7 @@ const ChessTournamentForm = () => {
               />
             </div>
 
-            {/* Parent Contact - Only for Under 12 */}
+            {/* Parent contact appears only if category = Under 12 */}
             {values.category === "Under 12" && (
               <div className="mb-3">
                 <label className="form-label">Parent Contact</label>
@@ -227,7 +224,7 @@ const ChessTournamentForm = () => {
               </div>
             )}
 
-            {/* Payment Confirmation */}
+            {/* Payment checkbox */}
             <div className="form-check mb-2">
               <Field
                 type="checkbox"
@@ -242,10 +239,12 @@ const ChessTournamentForm = () => {
               />
             </div>
 
-            {/* Terms & Conditions */}
+            {/* Terms checkbox */}
             <div className="form-check mb-3">
               <Field type="checkbox" name="terms" className="form-check-input" />
-              <label className="form-check-label">Accept Terms & Conditions</label>
+              <label className="form-check-label">
+                Accept Terms & Conditions
+              </label>
               <ErrorMessage
                 name="terms"
                 component="div"
@@ -253,7 +252,7 @@ const ChessTournamentForm = () => {
               />
             </div>
 
-            {/* Submit Button */}
+            {/* Submit button */}
             <button type="submit" className="btn btn-primary">
               Register Player
             </button>
@@ -261,7 +260,7 @@ const ChessTournamentForm = () => {
         )}
       </Formik>
 
-      {/* Display table of submitted players */}
+      {/* Show registered players in a table */}
       {players.length > 0 && (
         <div className="mt-5">
           <h3>Registered Players</h3>
@@ -303,5 +302,5 @@ const ChessTournamentForm = () => {
   );
 };
 
-// Export the component for use in App.js
+// Export the component so it can be used in other files
 export default ChessTournamentForm;
